@@ -21,7 +21,7 @@ jobs:
         uses: teleport-actions/auth@v1
         with:
           # Specify the publically accessible address of your Teleport proxy.
-          proxy: dk.teleportdemo.com:443
+          proxy: my.teleportproxy.net:443
           # Specify the name of the join token for your bot.
           token: gha-provisioning-token
           # Specify the length of time that the generated credentials should be
@@ -33,7 +33,7 @@ jobs:
           anonymous-telemetry: 1
       - name: Create Token
         run: | 
-          token=$(tctl tokens add --type=node --auth-server dk.teleportdemo.com:443 --format=json | jq .token)
+          token=$(tctl tokens add --type=node --auth-server my.teleportproxy.net:443 --format=json | jq .token)
           echo "::add-mask::$token"
           echo "TF_VAR_join_token=$token" >> $GITHUB_ENV
       - name: Terraform Init
