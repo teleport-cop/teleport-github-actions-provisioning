@@ -1,6 +1,6 @@
 # Secure provisioning of Teleport targets with Github Actions
 
-This repository is an example of using Teleport Machine ID with Github Actions, to securely provision Teleport targets. It includes the Actions workflow, as well as some example Terraform code for provisining a server to AWS. 
+This repository is an example of using Teleport Machine ID with Github Actions, to securely provision Teleport targets. It includes the Actions workflow, as well as some example Terraform code for provisioning a server to AWS. 
 
 By running this workflow, you can provision a server which will automatically join itself to your Teleport cluster, without any hardcoded secrets. 
 
