@@ -17,7 +17,7 @@ jobs:
       - name: Install Teleport
         uses: teleport-actions/setup@v1
         with:
-          version: 12.1.0
+          version: 12.1.1
       - name: Authorize against Teleport
         id: auth
         uses: teleport-actions/auth@v1
@@ -34,6 +34,7 @@ jobs:
           # more information.
           anonymous-telemetry: 1
       - name: Create Token
+        # Specify the publically accessible address of your Teleport proxy below.
         run: | 
           token=$(tctl tokens add --type=node --auth-server my.teleportproxy.net:443 --format=json | jq .token)
           echo "::add-mask::$token"
