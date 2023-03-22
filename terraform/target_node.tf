@@ -66,7 +66,7 @@ proxy_service:
 ssh_service:
   enabled: "yes"
   labels:
-    role: rds-service
+    role: ssh
     environment: dev
   commands:
   - name: hostname
