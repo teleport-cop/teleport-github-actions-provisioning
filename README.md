@@ -35,7 +35,7 @@ The great thing about Machine ID is that it can helpe with use cases outside of 
 
 ### Pre-requisites
 * An existing Teleport cluster or Teleport Cloud instance. See a getting started guide for a self-hosted cluster [here](https://goteleport.com/docs/try-out-teleport/linux-server/). You will need the publically available DNS address of your Teleport service as an input for this action. 
-* A Github Personal Access Token (If you plan to run this action from a private github repo).
+* A Github Personal Access Token (with repository read/write permissions).
 * AWS Credentials for Terraform provisioning (If you plan to run the Terraform step in this workflow)
 
 ### Teleport Configuration
@@ -45,7 +45,7 @@ The great thing about Machine ID is that it can helpe with use cases outside of 
 
 ### Github Actions Configuration
 1. The example workflow at `.github/workflows/main.yaml` requires four secrets to run. 
-   * PAT:  A github Personal Access Token which will give the workflow permissions to check out your repository if it is private. Even if your repo is public you will still need this token for the workflow to run properly.
+   * PAT:  A github Personal Access Token which will give the workflow permissions to check out your repository.
    * AWS_ACCESS_KEY_ID
    * AWS_SECRET_ACCESS_KEY
    * AWS_SESSION_TOKEN
