@@ -17,7 +17,7 @@ jobs:
       - name: Install Teleport
         uses: teleport-actions/setup@v1
         with:
-          version: 12.1.0
+          version: 12.1.1
       - name: Authorize against Teleport
         id: auth
         uses: teleport-actions/auth@v1
@@ -34,30 +34,31 @@ jobs:
           # more information.
           anonymous-telemetry: 1
       - name: Create Token
+        # Specify the publically accessible address of your Teleport proxy below.
         run: | 
           token=$(tctl tokens add --type=node --auth-server my.teleportproxy.net:443 --format=json | jq .token)
           echo "::add-mask::$token"
           echo "TF_VAR_join_token=$token" >> $GITHUB_ENV
       - name: Terraform Init
         run: | 
+          cd terraform
           terraform init
-          working-directory: terraform
       - name: Terraform Plan
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
         run: | 
+          cd terraform
           terraform plan
-          working-directory: terraform
       - name: Terraform Apply
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
         run: | 
+          cd terraform
           terraform apply -auto-approve
-          working-directory: terraform
       - name: Sleep for 10 minutes
         run: sleep 10m
         shell: bash
@@ -67,6 +68,6 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
         run: | 
+          cd terraform
           terraform destroy -auto-approve
-          working-directory: terraform
 
